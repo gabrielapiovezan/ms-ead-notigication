@@ -1,0 +1,52 @@
+server:
+  port: 8084
+  servlet:
+    context-path: '/ead-notification/'
+
+spring:
+  application:
+    name: ead-notification-service
+  config:
+    import: 'optional:configserver:'
+    cloud:
+      config:
+        discovery:
+          serviceId: ead-config-server
+  datasource:
+    url: jdbc:mysql://localhost:3306/ead_notification
+    username: user-notification
+    password: '123456'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  output:
+    ansi:
+      enabled: always
+  rabbitmq:
+    addresses: amqps://qlpqgslv:5iz5l1wnCLexdw328B3wf1yurbVB_IM7@woodpecker.rmq.cloudamqp.com/qlpqgslv
+
+logging:
+  level:
+    com.ead: TRACE
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
+
+eureka:
+  client:
+    service-url:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - refresh
+          - health
