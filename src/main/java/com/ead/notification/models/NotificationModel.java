@@ -23,7 +23,8 @@ public class NotificationModel implements Serializable {
     @Column(name = "notification_id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
     @Type(type = "uuid-char")
     private UUID notificationId;
-    @Column(nullable = false)
+    @Column(name = "user_id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @Type(type = "uuid-char")
     private UUID userId;
     @Column(nullable = false, length = 120)
     private String title;
